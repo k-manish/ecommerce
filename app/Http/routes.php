@@ -17,10 +17,10 @@ Route::get('/', function () {
 
 Route::get('Registration', 'Home@index');
 Route::get('RegistrationValidate', 'Home@store');
-Route::get('mytest', 'Home@filem');
 Route::get('MainPage','Main@index');
 Route::get('UserProfile','Main@userinfo');
 Route::get('login','Login@index');
-Route::get('user_addition','Main@addUser');
+Route::get('useraddition','Main@addUser');
 Route::get('getaddeduser','Main@addedUserDetail');
 Route::get('logout','Logout@index');
+Route::get('checkmail','Home@checkMail');

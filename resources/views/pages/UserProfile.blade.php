@@ -1,3 +1,14 @@
+<?php
+/**
+* File Name :UserProfile.blade.php
+* File Path :view/pages/
+* Author :Manish Kumar
+* Date of creation :08/09/2016
+* Comments if any :display user detail
+*
+*/
+?>
+
 @extends('master')
 
 @section('title')

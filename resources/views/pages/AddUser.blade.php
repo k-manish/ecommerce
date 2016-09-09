@@ -1,3 +1,14 @@
+<?php
+/**
+* File Name :AddUser.blade.php
+* File Path :view/pages/
+* Author :Manish Kumar
+* Date of creation :08/09/2016
+* Comments if any : admin user addition page
+*
+*/
+?>
+
 @extends('master')
 
 @section('title')

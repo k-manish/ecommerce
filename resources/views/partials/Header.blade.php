@@ -1,5 +1,16 @@
+<?php
+/**
+* File Name :Header.blade.php
+* File Path :view/pages/partials/
+* Author :Manish Kumar
+* Date of creation :08/09/2016
+* Comments if any : nav bar- is displays at top
+*
+*/
+?>
+
 <div class="container row well" style="width:100%">
-    <div class="col-sm-11 col-md-11 col-lg-11">
+    <div class="col-sm-10 col-md-10 col-lg-10">
        <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">profile
             <span class="caret"></span></button>
@@ -18,10 +29,8 @@
             </ul>
         </div> 
     </div>
-    <div class="col-sm-1 col-md-1 col-lg-1">
+    <div class="col-sm-2 col-md-2 col-lg-2">
         <a href="{{action('Logout@index')}}"><button type="button" class="btn btn-info">
         <span class="glyphicon glyphicon-log-out"></span> Logout</button> </a>
     </div>
 </div>
-
-<script src="assets/js/Header.js"></script>

@@ -1,12 +1,28 @@
 <?php
 
+/**
+* File Name :LoginModel.php
+* File Path :App/
+* Author :Manish Kumar
+* Date of creation :08/09/2016
+* Comments if any : 
+*
+*/
+
 namespace App;
 
 use FileMaker;
 use App\config\dbconfig;
 class LoginModel extends FileMaker
 {
+    /**
+     *@var object
+     */
     protected $fmcon;
+    
+    /**
+     *@var object
+     */
     protected $request;
 
     public function __construct()
@@ -15,6 +31,11 @@ class LoginModel extends FileMaker
         $this->request = $this->fmcon->newFindCommand('USER');
     }
     
+    /**
+     *@param String $mail
+     *@param String $pswd
+     *@return boolean
+     */
     public function getRecord($mail="",$pswd="")
     {
         $this->request->addFindCriterion("mail_id","==$mail");

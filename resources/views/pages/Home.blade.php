@@ -4,7 +4,7 @@
 * File Path :view/pages/
 * Author :Manish Kumar
 * Date of creation :02/09/2016
-* Comments if any :
+* Comments if any : login page 
 *
 */
 ?>

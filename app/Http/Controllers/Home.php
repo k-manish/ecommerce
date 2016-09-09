@@ -29,6 +29,7 @@ class Home extends Controller
     /**
      *@param objectofRegistration  $request
      *@return view pages.Home
+     *@uses UserReg::addUser($name,$mail,$contact,$pswd)    to add user 
      */
     public function store(RegistrationRequest $request)
     {
@@ -42,32 +43,18 @@ class Home extends Controller
        $c->addUser($name,$mail,$contact,$pswd);
        $c->find();
     }
-    
-    public function test()
+    /**
+     *@param void
+     *@return void
+     *@uses UserReg::checkMail($mail)  to verify mail-id is present or not.
+     */
+    public function checkMail()
     {
-        $name="name";
-        $mail="mail";
-        $contact="mobile";
-        $pswd="pswd";
-        $fm = new \FileMaker(dbname,ipaddr,username,password);
-        $cmd = $fm->newAddCommand('user_add_self');
-        $cmd->setFiled('name',$name);
-        $cmd->setFiled('mail_id',$mail);
-        $cmd->setFiled('mobile',$contact);
-        $cmd->setFiled('password',$pswd);
-        $cmd->setFiled('parentId_fk',null);
-        $result = $cmd->execute();
-        if(FileMaker::isError($result)){ 
-            die('Error - ' . $fm->getCode() . ' ' . $fm->getMessage());
-        }
-        else
-            echo 'registration done';
-    }
-    
-    
-    public function filem()
-    {
-        return view('pages.mytest');
+        $mail=$_REQUEST["q"];
+        $obj=new UserReg();
+        $result=$obj->checkMail($mail);
+        if($result)
+            echo "email_id is already present";
     }
 
 }

@@ -9,3 +9,6 @@
 body{
     background-color: rgb(234, 237, 237);
 }
+#error{
+    color: red;
+}
