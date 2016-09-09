@@ -1,4 +1,13 @@
-
+<?php
+/**
+* File Name :Registration.blade.php
+* File Path :view/pages/partials
+* Author :Manish Kumar
+* Date of creation :08/09/2016
+* Comments if any :
+*
+*/
+?>
 <div class="container primediv">
     <h2>Fill Following Detail</h2>
     @if($errors->any())
@@ -7,7 +16,8 @@
                 <li> {{ $error }}</li>                        
             @endforeach
         </ul>
-    @endif        
+    @endif
+    <h5 id="error"></h5>
     <form action='http://localhost/ecommerce/public/RegistrationValidate'>
         <div class="form-group">
             <label for="name" class="control-level col-sm-2 com-md-2 com-lg-2">Name:-</label>
@@ -15,7 +25,8 @@
         </div>
         <div class="form-group">
             <label for="Email" class="control-level col-sm-2 com-md-2 com-lg-2">Email-id:-</label>
-            <input type="email" class="form-control com-sm-2 com-md-2 com-lg-2" id="mail" name="mail">
+            <input type="email" class="form-control com-sm-2 com-md-2 com-lg-2" id="mail" name="mail"
+                    onfocusout="checkMail()" >
         </div>
         <div class="form-group">
             <label for="name" class="control-level col-sm-2 com-md-2 com-lg-2">Contect-No:-</label>
@@ -38,3 +49,5 @@
         </div>
     </form>
 </div>
+    
+<script src="assets/js/Registration.js"></script>
