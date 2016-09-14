@@ -8,9 +8,8 @@
 *
 */
 ?>
-
 <div class="container row well" style="width:100%">
-    <div class="col-sm-10 col-md-10 col-lg-10">
+    <div class="col-sm-12 col-md-8 col-lg-10">
        <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">profile
             <span class="caret"></span></button>
@@ -20,16 +19,25 @@
                         <span class="glyphicon glyphicon-user"></span> MyProf
                     </a>
                 </li>
-                <li id="l2" class=""><a href="{{ action('Main@addUser') }}" id="adduser">
+                <li id="l2" class=""><a href="{{ action('Main@userAddition') }}" id="adduser">
                     <span class="glyphicon glyphicon-user">AddUser</a>
                 </li>
-                <li id="l3" class=""> <a href="{{action('Main@addedUserDetail')}}" id="showuser">
+                <li id="l3" class=""> <a href="{{action('Main@addedUser')}}" id="showuser">
                     <span class="glyphicon glyphicon-user">ShowUser</a>
                 </li>
             </ul>
         </div> 
     </div>
-    <div class="col-sm-2 col-md-2 col-lg-2">
+    <div class="col-sm-12 col-md-2 col-lg-1 ">
+        <a href="#">
+            <button type="button" id="cart" class="btn btn-info"  onclick="checkOrder()">
+                    <span class="glyphicon glyphicon-briefcase"></span>
+                        Cart
+                    <span class="badge" >0</span>
+            </button>
+        </a>
+    </div>
+    <div class="col-sm-12 col-md-2 col-lg-1 ">
         <a href="{{action('Logout@index')}}"><button type="button" class="btn btn-info">
         <span class="glyphicon glyphicon-log-out"></span> Logout</button> </a>
     </div>

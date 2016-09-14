@@ -29,6 +29,7 @@
     <![endif]-->
     
     @yield('headsection')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
   </head>
   <body>
      @yield('body')

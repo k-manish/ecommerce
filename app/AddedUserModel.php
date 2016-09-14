@@ -35,36 +35,94 @@ class AddedUserModel extends FileMaker
     public function __construct()
     {
         $this->fmcon = new FileMaker(dbname,ipaddr,username,password);
-        $this->request = $this->fmcon->newFindCommand('USER');
+       
     }
     
     /**
-     *@param String $mail
+     *@param int $id
+     *@param int $cur
+     *@param int $rc
      *@return array
      */
-    public function getRecord($mail)
+    public function getRecord($id,$cur,$rc)
     {
+        $skip = ($cur-1) * $rc;
         $rarr=array();
-        $this->request->addFindCriterion('mail_id', "==$mail");
+        $this->request = $this->fmcon->newFindCommand('USER');
+        $this->request->addFindCriterion('parentId_fk', "==$id");
+        $this->request->setRange($skip, ($skip + $rc) );
         $result = $this->request->execute();
-        $this->records = $result->getRecords();
-        
-        foreach($this->records as $record)
-        {
-            $record1=$record->getRelatedSet('user_SELF_id_parentID');
-            if(FileMaker::isError($record1)){
-                //return array of zero length
-                return $rarr;
-            }
-            foreach($record1 as $record2)
-            {
-                $arr=array();
-                $arr['name']=$record2->getField('user_SELF_id_parentID::name');
-                $arr['mail']=$record2->getField('user_SELF_id_parentID::mail_id');
-                $arr['mobile']=$record2->getField('user_SELF_id_parentID::mobile');
-                array_push($rarr,$arr);
-            }
+        $count=$result->getFoundSetCount();
+        array_push($rarr, $count);
+        $this->records=$result->getRecords();
+        if(Filemaker::isError($this->records)) {
+            $arr1=array();
+            array_push($rarr, $arr1);
+            return $rarr;
+        }
+        foreach ( $this->records as $res) {
+            $arr=array();
+            $arr['recordid'] = $res->getRecordId();
+            $arr['name'] = $res->getField('name');
+            $arr['mail'] = $res->getField('mail_id');
+            $arr['mobile'] = $res->getField('mobile');
+            array_push($rarr, $arr);
         }
         return $rarr;
+    }
+    
+    /**
+     *@param int $id
+     *@param String $str
+     *@param int $cur
+     *@param int $rc
+     *@return $arr
+     */
+    public function getSearchedRecord($id, $str, $cur ,$rc)
+    {
+        $skip = ($cur-1) * $rc;
+        $arr=array();
+        $findRequest1 = $this->fmcon->newFindRequest('USER');
+        $findRequest1->addFindCriterion('parentId_fk', $id);
+        $findRequest1->addFindCriterion('name', $str);
+        
+        $findRequest2 = $this->fmcon->newFindRequest('USER');
+        $findRequest2->addFindCriterion('parentId_fk', $id);
+        $findRequest2->addFindCriterion('mail_id', $str);
+        
+        $findRequest3 = $this->fmcon->newFindRequest('USER');
+        $findRequest3->addFindCriterion('parentId_fk', $id);
+        $findRequest3->addFindCriterion('mobile', $str);
+        
+        $compoundFind = $this->fmcon->newCompoundFindCommand('USER');
+        
+        $compoundFind->add(1, $findRequest1);
+        $compoundFind->add(2, $findRequest2);
+        $compoundFind->add(3, $findRequest3);
+        
+        $compoundFind->addSortRule('name', 1, FILEMAKER_SORT_ASCEND);
+        $compoundFind->setRange($skip, ($skip + $rc) );
+        $result = $compoundFind->execute();
+        $count=0;
+        
+        if ( FileMaker::isError($result)) {
+            $arr1=array();
+            array_push($arr, $count);
+            array_push($arr,$arr1);
+            return $arr;
+        }
+        $count=$result->getFoundSetCount();
+        array_push($arr, $count);
+        $this->records = $result->getRecords();
+            
+        foreach ( $this->records as $record ) {
+            $arr1=array();
+            $arr1['recordid'] = $record->getRecordId();
+            $arr1['name'] = $record->getField('name');
+            $arr1['mail'] = $record->getField('mail_id');
+            $arr1['mobile'] = $record->getField('mobile');
+            array_push($arr,$arr1);
+        }
+        return $arr;
     }
 }

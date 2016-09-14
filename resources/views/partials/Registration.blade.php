@@ -18,7 +18,7 @@
         </ul>
     @endif
     <h5 id="error"></h5>
-    <form action='http://localhost/ecommerce/public/RegistrationValidate'>
+    <form action='http://localhost/ecommerce/public/useraddition'>
         <div class="form-group">
             <label for="name" class="control-level col-sm-2 com-md-2 com-lg-2">Name:-</label>
             <input type="text" class="form-control com-sm-2 com-md-2 com-lg-2" id="name" name="name"autofocus>

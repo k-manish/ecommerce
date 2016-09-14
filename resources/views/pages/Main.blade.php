@@ -15,7 +15,16 @@
 Mainpage
 @stop
 
+@section('headsection')
+    <link rel="stylesheet" href="assets/css/SideDiv.css">
+@stop
+
 
 @section('body')
     @include('partials.Header')
+    
+@stop
+
+@section('footer')
+    <script src=assets/js/Cart.js></script>
 @stop

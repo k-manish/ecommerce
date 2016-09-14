@@ -13,6 +13,8 @@ namespace App;
 
 use FileMaker;
 use App\config\dbconfig;
+use Session;
+
 class LoginModel extends FileMaker
 {
     /**
@@ -45,8 +47,9 @@ class LoginModel extends FileMaker
          }
         $records = $result->getRecords();
         $record=$records[0];
-       if($record->getField("password")==$pswd)
+        if($record->getField("password")==$pswd)
         {
+            Session::put('userid',$record->getField("id"));
             return true;
         }
         return false;

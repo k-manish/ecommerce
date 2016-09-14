@@ -4,7 +4,7 @@
 * File Name :MyProfModel.php
 * File Path :App/
 * Author :Manish Kumar
-* Date of creation :08/09/2016
+* Date of creation :13/09/2016
 * Comments if any : 
 *
 */
@@ -16,13 +16,14 @@ use App\config\dbconfig;
 
 class MyProfModel extends Model
 {
+    
     /**
-     *@var object
+     *@var object FileMaker object
      */
     protected $fmcon;
     
     /**
-     *@var object
+     *@var object FileMaker_Command object
      */
     protected $request;
 
@@ -31,6 +32,7 @@ class MyProfModel extends Model
         $this->fmcon = new FileMaker(dbname,ipaddr,username,password);
         $this->request = $this->fmcon->newFindCommand('USER');
     }
+
     /**
      *@param String $mail
      *@return array
@@ -45,6 +47,7 @@ class MyProfModel extends Model
         $arr['name']=$record->getField("name");
         $arr['mail_id']=$record->getField("mail_id");
         $arr['contact']=$record->getField("mobile");
+        $arr['refered']=$record->getField("parentId_fk");
         return $arr;
     }
 }
