@@ -6,10 +6,8 @@ $.ajaxSetup({
         }
 });
  
-var grid=$("#grid-data").bootgrid({
+var grid = $("#grid-data").bootgrid({
     ajax: true,
-    selection:true,
-    multiSelect:true,
     post: function ()
     {
         /* To accumulate custom parameter with the request object */
@@ -18,13 +16,13 @@ var grid=$("#grid-data").bootgrid({
         };
         
     },
-    url: "getaddeduser",
+    url: "adminProductDetail",
     formatters: {
         "command": function(column, row)
         {
-            return "<button id=\""+row.recordid+"\"class=\"btn-del\" type=\"button\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>"+
+                return "<button id=\""+row.recordid+"\"class=\"btn-del\" type=\"button\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>"+
                    "<button id=\""+row.recordid+"\"class=\"btn-edit\" data-toggle=\"modal\" data-target=\"#myModal\">"+
-                   "<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button>"; 
+                   "<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></button>";
         }
     }
 }).on("loaded.rs.jquery.bootgrid", function()
@@ -34,7 +32,7 @@ var grid=$("#grid-data").bootgrid({
                 
                 $.ajax({
                         type:"POST",
-                        url:baseurl + "/deluser",
+                        url:"./delproduct",
                         data:{
                                 id : $(this).attr('id')
                         },
@@ -46,15 +44,16 @@ var grid=$("#grid-data").bootgrid({
         
         grid.find(".btn-edit").on("click", function()
             {
-               window.location.replace(baseurl + "/editdetail/"+$(this).attr('id'));
+               window.location = "./editproduct/"+$(this).attr('id');
         });
         
         grid.find('tbody tr').on('click', function(e){
                 if ($(e.target).hasClass('btn-edit') || $(e.target).hasClass('btn-del')) {
                     e.preventDefault();    
-                } else {
-                        window.location = baseurl + "/addeduserprofile/"+$(this).find('.btn-edit').attr('id');
+                } else{
+                        window.location = "./showproductdetail/"+$(this).find('.btn-edit').attr('id');
                 }
         });
-});
+        
+    });
 });

@@ -22,12 +22,12 @@
     @include('partials.Header')
     <table id="grid-data" class="table table-condensed table-hover table-striped">
         <thead>
-            <tr>
+            <tr class="onerecord">
                 <th data-column-id="recordid" data-visible="false">Id</th>
                 <th data-column-id="name">Name</th>
                 <th data-column-id="mail" >Email-id</th>
-                <th data-column-id="mobile" data-order="desc">Contact-No.</th>
-                <th data-column-id="link" data-formatter="command" data-sortable="false">Commands</th>
+                <th data-column-id="mobile" data-order="asc">Contact-No.</th>
+                <th data-column-id="link" data-formatter="command" data-sortable="false" class="command">Commands</th>
             </tr>
         </thead>
     </table>

@@ -31,6 +31,9 @@ class AddedUserModel extends FileMaker
      */
     protected $request;
     
+    protected $key;
+    protected $val;
+    
     
     public function __construct()
     {
@@ -44,11 +47,21 @@ class AddedUserModel extends FileMaker
      *@param int $rc
      *@return array
      */
-    public function getRecord($id,$cur,$rc)
+    public function getRecord($id,$cur,$rc,$sortarr)
     {
         $skip = ($cur-1) * $rc;
         $rarr=array();
+        foreach($sortarr as $key=>$value){
+            $this->key = $key;
+            $this->val = $value;
+        }
         $this->request = $this->fmcon->newFindCommand('USER');
+        if ( $this->val == 'asc') {
+            $this->request->addSortRule($this->key, 1, FILEMAKER_SORT_ASCEND);
+        } else {
+            $this->request->addSortRule($this->key, 1, FILEMAKER_SORT_DESCEND);
+        }
+        
         $this->request->addFindCriterion('parentId_fk', "==$id");
         $this->request->setRange($skip, ($skip + $rc) );
         $result = $this->request->execute();
@@ -78,13 +91,13 @@ class AddedUserModel extends FileMaker
      *@param int $rc
      *@return $arr
      */
-    public function getSearchedRecord($id, $str, $cur ,$rc)
+    public function getSearchedRecord($id, $str, $cur ,$rc,$sortarr)
     {
         $skip = ($cur-1) * $rc;
         $arr=array();
         $findRequest1 = $this->fmcon->newFindRequest('USER');
         $findRequest1->addFindCriterion('parentId_fk', $id);
-        $findRequest1->addFindCriterion('name', $str);
+        $findRequest1->addFindCriterion('mobile', $str);
         
         $findRequest2 = $this->fmcon->newFindRequest('USER');
         $findRequest2->addFindCriterion('parentId_fk', $id);
@@ -92,15 +105,23 @@ class AddedUserModel extends FileMaker
         
         $findRequest3 = $this->fmcon->newFindRequest('USER');
         $findRequest3->addFindCriterion('parentId_fk', $id);
-        $findRequest3->addFindCriterion('mobile', $str);
+        $findRequest3->addFindCriterion('name', $str);
         
         $compoundFind = $this->fmcon->newCompoundFindCommand('USER');
+        foreach($sortarr as $key=>$value){
+            $this->key = $key;
+            $this->val = $value;
+        }
+        if ( $this->val == 'asc') {
+            $compoundFind->addSortRule($this->key, 1, FILEMAKER_SORT_ASCEND);
+        } else {
+            $compoundFind->addSortRule($this->key, 1, FILEMAKER_SORT_DESCEND);
+        }
         
         $compoundFind->add(1, $findRequest1);
         $compoundFind->add(2, $findRequest2);
         $compoundFind->add(3, $findRequest3);
-        
-        $compoundFind->addSortRule('name', 1, FILEMAKER_SORT_ASCEND);
+
         $compoundFind->setRange($skip, ($skip + $rc) );
         $result = $compoundFind->execute();
         $count=0;

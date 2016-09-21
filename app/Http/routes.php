@@ -12,9 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('pages.Home');
+    return redircet('ecommerce');
 });
 
+Route::get('ecommerce', 'Pub@index');
 Route::get('Registration', 'Home@index');
 Route::get('RegistrationValidate', 'Home@store');
 Route::get('MainPage','Main@index');
@@ -29,5 +30,22 @@ Route::get('checkanyorder','Cart@index');
 Route::get('updateinfo','Main@updateInfo');
 Route::post('deluser','Main@delUser');
 Route::get('addUser','Main@userAddition');
-Route::post('editdetail','Main@getEditDetail');
-Route::get('userinfoedit','Main@editDetail');
+Route::get('userinfoedit', 'Main@editDetail');
+Route::get('addproduct', 'Product@addProduct');
+Route::get('ManageProduct', 'Product@adminProduct');
+Route::post('uploadproduct', 'Product@uploadProduct');
+Route::get('productdetail', 'Product@getAllProductDetail');
+Route::get('addeduserprofile/{id}','Main@addedUserProfile');
+Route::get('getproductdetail/{id}', 'Product@getdetail');
+Route::get('editdetail/{id}','Main@getEditDetail');
+Route::get('productdetail/{id}', 'Product@getThisProdDetail');
+Route::post('placeorder','Order@placeOrder');
+Route::post('adminProductDetail', 'Product@adminProductDetail');
+Route::post('delproduct','Product@delProduct');
+Route::get('showproductdetail/{id}','Product@showProductDetail');
+Route::get('editproduct/{id}','Product@editProduct');
+Route::post('updateproductinfo', 'Product@updateProductInfo');
+Route::get('addToCart', 'Cart@addToCart');
+Route::get('getUserOrderDetail', 'Order@getUserOrderDetail');
+Route::get('cartdetail', 'Cart@cartDetail');
+Route::get('removefromcart/{id}', 'Cart@removeFromCart');

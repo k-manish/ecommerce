@@ -18,7 +18,11 @@ Mainpage
 
 @section('body')
 
-@include('partials.Header')
+@if ( Session::get('admin') )
+    @include('partials.Header')
+@else
+    @include('partials.UserHeader')
+@endif
 <div class="container" style="background-color:rgb(70,200,200)">
     <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-2">Name:-</div>
@@ -33,4 +37,8 @@ Mainpage
         <div class="col-sm-6 col-md-6 col-lg-6">{!!$record['contact']!!}</div>
     </div>
 </div>
+    
+@section('footer')
+    <script src="http://localhost/ecommerce/public/assets/js/Cart.js"></script>
+@stop
 @stop

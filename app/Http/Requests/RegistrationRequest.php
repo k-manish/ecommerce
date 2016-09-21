@@ -37,7 +37,8 @@ class RegistrationRequest extends Request
             'mail'=>'required|email',
             'mobile'=>['bail','required','regex:/^[1-9][0-9]{9}/'],
             'pswd'=>'required',
-            'c_pswd'=>'required'
+            'c_pswd'=>'required',
+            'pswd' => 'same:c_pswd'
         ];
     }
 }

@@ -50,4 +50,15 @@ class MyProfModel extends Model
         $arr['refered']=$record->getField("parentId_fk");
         return $arr;
     }
+    
+    public function getUserDetail($layout, $id="")
+    {
+        $record= $this->fmcon->getRecordById($layout, $id);
+        $arr=array();
+        $arr['name']=$record->getField("name");
+        $arr['mail_id']=$record->getField("mail_id");
+        $arr['contact']=$record->getField("mobile");
+        $arr['refered']=$record->getField("parentId_fk");
+        return $arr;
+    }
 }

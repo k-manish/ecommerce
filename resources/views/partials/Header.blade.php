@@ -8,9 +8,10 @@
 *
 */
 ?>
-<div class="container row well" style="width:100%">
-    <div class="col-sm-12 col-md-8 col-lg-10">
-       <div class="dropdown">
+<body>
+<div class="container-fluid row well" style="width:100%">
+    <div class="col-sm-3 col-md-1 col-lg-1">
+        <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">profile
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
@@ -28,16 +29,13 @@
             </ul>
         </div> 
     </div>
-    <div class="col-sm-12 col-md-2 col-lg-1 ">
-        <a href="#">
-            <button type="button" id="cart" class="btn btn-info"  onclick="checkOrder()">
-                    <span class="glyphicon glyphicon-briefcase"></span>
-                        Cart
-                    <span class="badge" >0</span>
-            </button>
+        
+    <div class="col-sm-6 col-md-9 col-lg-10">
+        <a href="{{action('Product@adminProduct')}}"><button type="button" class="btn btn-link">
+            Manage Product</button>
         </a>
     </div>
-    <div class="col-sm-12 col-md-2 col-lg-1 ">
+    <div class="col-sm-3 col-md-2 col-lg-1 ">
         <a href="{{action('Logout@index')}}"><button type="button" class="btn btn-info">
         <span class="glyphicon glyphicon-log-out"></span> Logout</button> </a>
     </div>

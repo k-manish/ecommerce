@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../assets/css/Registration.css">
 @stop
 @section('body')
+    @include('partials.header')
 <div class='container primediv'>
     @if($errors->any())
         <ul class="alert alert-danger">
@@ -28,7 +29,7 @@
         </ul>
     @endif
     <h5 id="error"></h5>
-    <form action='http://localhost/ecommerce/public/updateinfo'>
+    <form action='updateinfo'>
         <div class="form-group">
             <input type="text" class="form-control com-sm-2 com-md-2 com-lg-2" name='uid' id="uid" value={!! $result['id'] !!} readonly>
         <div class="form-group">

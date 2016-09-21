@@ -45,7 +45,7 @@ class UpdateInfo extends FileMaker
     {
         $arr=array();
         $this->record = $this->fmcon->getRecordById('USER',$id);
-        $arr['id']=$this->record->getField('id');
+        $arr['id']=$id;
         $arr['name']=$this->record->getField('name');
         $arr['mail']=$this->record->getField('mail_id');
         $arr['mobile']=$this->record->getField('mobile');

@@ -21,8 +21,17 @@ Mainpage
 
 
 @section('body')
-    @include('partials.Header')
+    @if ( Session::get('admin') )
+        @include('partials.Header')
+    @else
+        @include('partials.UserHeader')
+    @endif
     
+    @if (session('rmsg'))
+        <div class="alert alert-success">
+            {{ session('rmsg') }}
+        </div>
+    @endif  
 @stop
 
 @section('footer')

@@ -31,9 +31,9 @@
     @yield('headsection')
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
   </head>
-  <body>
      @yield('body')
-    
+    <!-- tag '<body>' has added in 'Hedaer' and 'UserHeader' partials page.
+      If page is without these partial use tag '<body>' in body section -->
     
     
     
@@ -41,5 +41,9 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         
     @yield('footer')
+    <script type="text/javascript">
+      var baseurl = {!! json_encode(url('/')) !!};
+    </script>
+    <script src="{{asset('assets/js/Cart.js')}}"></script>
   </body>
 </html>

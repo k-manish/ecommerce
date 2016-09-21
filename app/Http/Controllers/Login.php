@@ -57,6 +57,6 @@ class Login extends Controller
             Session::put('user',$this->userid);
             return redirect('MainPage');
         }
-        return redirect('');
+        return redirect('')->with('error','You can\'t login now');
     }
 }
